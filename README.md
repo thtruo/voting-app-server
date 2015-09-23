@@ -1,0 +1,3 @@
+#Full Stack Redux Tutorial
+
+After using Meteor 1.1 with React, I became delightfully obsessed with the React way of building UI components for my apps. Here's another learning journey for me to better understand Flux, a structured way of implementing a unidirectional data flow architecture for React applications. For reference, I'm using this [tutorial](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html).
