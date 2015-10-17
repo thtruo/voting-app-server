@@ -3,6 +3,7 @@ import {expect} from 'chai';
 import {setEntries, next} from '../src/core';
 
 describe('application logic', () => {
+
   describe('setEntries', () => {
     it('converts to immutable', () => {
       const state = Map();
@@ -25,6 +26,46 @@ describe('application logic', () => {
           pair: List.of('Batman Begins', 'The Dark Knight')
         }),
         entries: List.of('The Dark Knight Rises', 'Batman v Superman')
+      }));
+    });
+
+    it('puts winner of current vote back to entries', () => {
+      const state = Map({
+        vote: Map({
+          pair: List.of('Batman Begins', 'The Dark Knight'),
+          tally: Map({
+            'Batman Begins': 2,
+            'The Dark Knight': 4
+          })
+        }),
+        entries: List.of('The Dark Knight Rises', 'Batman v Superman', 'Suicide Squad')
+      });
+      const nextState = next(state);
+      expect(nextState).to.equal(Map({
+        vote: Map({
+          pair: List.of('The Dark Knight Rises', 'Batman v Superman')
+        }),
+        entries: List.of('Suicide Squad', 'The Dark Knight')
+      }));
+    });
+
+    it('puts both from tied vote back to entries', () => {
+      const state = Map({
+        vote: Map({
+          pair: List.of('Batman Begins', 'The Dark Knight'),
+          tally: Map({
+            'Batman Begins': 3,
+            'The Dark Knight': 3
+          })
+        }),
+        entries: List.of('The Dark Knight Rises', 'Batman v Superman', 'Suicide Squad')
+      });
+      const nextState = next(state);
+      expect(nextState).to.equal(Map({
+        vote: Map({
+          pair: List.of('The Dark Knight Rises', 'Batman v Superman')
+        }),
+        entries: List.of('Suicide Squad', 'Batman Begins', 'The Dark Knight')
       }));
     });
   });
