@@ -1,6 +1,6 @@
 import {List, Map} from 'immutable';
 import {expect} from 'chai';
-import {setEntries, next} from '../src/core';
+import {setEntries, next, vote} from '../src/core';
 
 describe('application logic', () => {
 
@@ -98,7 +98,7 @@ describe('application logic', () => {
       const nextState = vote(state, 'The Dark Knight');
       expect(nextState).to.equal(Map({
         vote: Map({
-          pair: List.of('Batman Begins', 'The Dark Knight')
+          pair: List.of('Batman Begins', 'The Dark Knight'),
           tally: Map({
             'The Dark Knight': 1
           }),
@@ -121,7 +121,7 @@ describe('application logic', () => {
       const nextState = vote(state, 'The Dark Knight');
       expect(nextState).to.equal(Map({
         vote: Map({
-          pair: List.of('Batman Begins', 'The Dark Knight')
+          pair: List.of('Batman Begins', 'The Dark Knight'),
           tally: Map({
             'Batman Begins': 2,
             'The Dark Knight': 4

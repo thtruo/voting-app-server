@@ -1,7 +1,7 @@
 import {List, Map} from 'immutable';
 
 export function setEntries(state, entries) {
-  return state.set('entries', List.(entries));
+  return state.set('entries', List(entries));
 }
 
 function getWinners(vote) {
