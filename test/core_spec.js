@@ -68,6 +68,23 @@ describe('application logic', () => {
         entries: List.of('Suicide Squad', 'Batman Begins', 'The Dark Knight')
       }));
     });
+
+    it('marks winner when just one entry left', () => {
+      const state = Map({
+        vote: Map({
+          pair: List.of('Batman Begins', 'The Dark Knight'),
+          tally: Map({
+            'Batman Begins': 2,
+            'The Dark Knight': 4
+          })
+        }),
+        entries: List()
+      });
+      const nextState = next(state);
+      expect(nextState).to.equal(Map({
+        winner: 'The Dark Knight'
+      }));
+    });
   });
 
   describe('vote', () => {
