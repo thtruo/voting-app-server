@@ -57,9 +57,9 @@ describe('reducer', () => {
     const actions = [
       {type: 'SET_ENTRIES', entries: ['Batman Begins', 'The Dark Knight']},
       {type: 'NEXT'},
-      {type: 'VOTE', 'The Dark Knight'},
-      {type: 'VOTE', 'Batman Begins'},
-      {type: 'VOTE', 'The Dark Knight'},
+      {type: 'VOTE', entry: 'The Dark Knight'},
+      {type: 'VOTE', entry: 'Batman Begins'},
+      {type: 'VOTE', entry: 'The Dark Knight'},
       {type: 'NEXT'}
     ];
     const finalState = actions.reduce(reducer, Map());

@@ -90,44 +90,32 @@ describe('application logic', () => {
   describe('vote', () => {
     it('creates a tally for the voted entry', () => {
       const state = Map({
-        vote: Map({
-          pair: List.of('Batman Begins', 'The Dark Knight')
-        }),
-        entries: List()
+        pair: List.of('Batman Begins', 'The Dark Knight')
       });
       const nextState = vote(state, 'The Dark Knight');
       expect(nextState).to.equal(Map({
-        vote: Map({
-          pair: List.of('Batman Begins', 'The Dark Knight'),
-          tally: Map({
-            'The Dark Knight': 1
-          }),
+        pair: List.of('Batman Begins', 'The Dark Knight'),
+        tally: Map({
+          'The Dark Knight': 1
         }),
-        entries: List()
       }));
     });
 
     it('adds to existing tally for the voted entry', () => {
       const state = Map({
-        vote: Map({
-          pair: List.of('Batman Begins', 'The Dark Knight'),
-          tally: Map({
-            'Batman Begins': 2,
-            'The Dark Knight': 3
-          })
-        }),
-        entries: List()
+        pair: List.of('Batman Begins', 'The Dark Knight'),
+        tally: Map({
+          'Batman Begins': 2,
+          'The Dark Knight': 3
+        })
       });
       const nextState = vote(state, 'The Dark Knight');
       expect(nextState).to.equal(Map({
-        vote: Map({
-          pair: List.of('Batman Begins', 'The Dark Knight'),
-          tally: Map({
-            'Batman Begins': 2,
-            'The Dark Knight': 4
-          }),
-        }),
-        entries: List()
+        pair: List.of('Batman Begins', 'The Dark Knight'),
+        tally: Map({
+          'Batman Begins': 2,
+          'The Dark Knight': 4
+        })
       }));
     });
   });
