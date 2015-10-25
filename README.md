@@ -27,8 +27,20 @@ Organizing live votes for groups with the goal of identifying a single winner.
 *TO DO*
 
 
+##Learnings about ES6##
+
+To iterate over values of an array, we can use the new `for..of` loop. It looks like this:
+
+    const array = ['a', 'b', 'c', 'd'];
+    for (let value of array) {
+        console.log(value);
+    }
+    // console: a, b, c, d
+
+We don't want to use the `for..in` loop from ES5. It was designed to work on plain Objects with string keys and is not great for arrays.
+
+We also may not want to use the `forEach` method from ES5 because we can't break out of the loop using `break` or `return`.
 
 
-
-
-
+- `for..of` is for looping over data - like values in array
+- `for..in` is for looping over object properties
