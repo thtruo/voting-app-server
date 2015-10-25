@@ -118,5 +118,24 @@ describe('application logic', () => {
         })
       }));
     });
+
+    it('prevents voting for entry not included in current pair', () => {
+      const state = Map({
+        pair: List.of('Batman Begins', 'The Dark Knight'),
+        tally: Map({
+          'Batman Begins': 2,
+          'The Dark Knight': 3
+        })
+      });
+      const nextState = vote(state, 'Suicide Squad');
+      expect(nextState).to.equal(Map({
+        pair: List.of('Batman Begins', 'The Dark Knight'),
+        tally: Map({
+          'Batman Begins': 2,
+          'The Dark Knight': 3
+        })
+      }));
+    });
+
   });
 });
