@@ -21,6 +21,7 @@ describe('reducer', () => {
     const nextState = reducer(initialState, action);
     expect(nextState).to.equal(fromJS({
       vote: {
+        round: 1,
         pair: ['Batman Begins', 'The Dark Knight']
       },
       entries: []
@@ -30,6 +31,7 @@ describe('reducer', () => {
   it('handles VOTE', () => {
     const initialState = fromJS({
       vote: {
+        round: 1,
         pair: ['Batman Begins', 'The Dark Knight']
       },
       entries: []
@@ -38,6 +40,7 @@ describe('reducer', () => {
     const nextState = reducer(initialState, action);
     expect(nextState).to.equal(fromJS({
       vote: {
+        round: 1,
         pair: ['Batman Begins', 'The Dark Knight'],
         tally: {'The Dark Knight': 1}
       },
