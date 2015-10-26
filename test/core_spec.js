@@ -98,13 +98,16 @@ describe('application logic', () => {
         round: 1,
         pair: List.of('Batman Begins', 'The Dark Knight')
       });
-      const nextState = vote(state, 'The Dark Knight');
+      const nextState = vote(state, 'The Dark Knight', 'voter1');
       expect(nextState).to.equal(Map({
         round: 1,
         pair: List.of('Batman Begins', 'The Dark Knight'),
         tally: Map({
           'The Dark Knight': 1
         }),
+        votes: Map({
+          voter1: 'The Dark Knight'
+        })
       }));
     });
 
@@ -115,17 +118,49 @@ describe('application logic', () => {
         tally: Map({
           'Batman Begins': 2,
           'The Dark Knight': 3
-        })
+        }),
+        votes: Map()
       });
-      const nextState = vote(state, 'The Dark Knight');
+      const nextState = vote(state, 'The Dark Knight', 'voter1');
       expect(nextState).to.equal(Map({
         round: 1,
         pair: List.of('Batman Begins', 'The Dark Knight'),
         tally: Map({
           'Batman Begins': 2,
           'The Dark Knight': 4
+        }),
+        votes: Map({
+          voter1: 'The Dark Knight'
         })
       }));
+    });
+
+    it('nullifies previous vote for the same voter', () => {
+      expect(
+        vote(Map({
+          round: 1,
+          pair: List.of('Trainspotting', '28 Days Later'),
+          tally: Map({
+            'Trainspotting': 3,
+            '28 Days Later': 2
+          }),
+          votes: Map({
+            voter1: '28 Days Later'
+          })
+        }), 'Trainspotting', 'voter1')
+      ).to.equal(
+        Map({
+          round: 1,
+          pair: List.of('Trainspotting', '28 Days Later'),
+          tally: Map({
+            'Trainspotting': 4,
+            '28 Days Later': 1
+          }),
+          votes: Map({
+            voter1: 'Trainspotting'
+          })
+        })
+      );
     });
 
     it('prevents voting for entry not included in current pair', () => {

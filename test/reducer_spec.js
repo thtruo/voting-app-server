@@ -36,13 +36,15 @@ describe('reducer', () => {
       },
       entries: []
     });
-    const action = {type: 'VOTE', entry: 'The Dark Knight'};
+    const action =
+      {type: 'VOTE', entry: 'The Dark Knight', clientId: 'voter1'};
     const nextState = reducer(initialState, action);
     expect(nextState).to.equal(fromJS({
       vote: {
         round: 1,
         pair: ['Batman Begins', 'The Dark Knight'],
-        tally: {'The Dark Knight': 1}
+        tally: {'The Dark Knight': 1},
+        votes: {voter1: 'The Dark Knight'}
       },
       entries: []
     }));
@@ -60,9 +62,9 @@ describe('reducer', () => {
     const actions = [
       {type: 'SET_ENTRIES', entries: ['Batman Begins', 'The Dark Knight']},
       {type: 'NEXT'},
-      {type: 'VOTE', entry: 'The Dark Knight'},
-      {type: 'VOTE', entry: 'Batman Begins'},
-      {type: 'VOTE', entry: 'The Dark Knight'},
+      {type: 'VOTE', entry: 'The Dark Knight', clientId: 'voter1'},
+      {type: 'VOTE', entry: 'Batman Begins', clientId: 'voter2'},
+      {type: 'VOTE', entry: 'The Dark Knight', clientId: 'voter3'},
       {type: 'NEXT'}
     ];
     const finalState = actions.reduce(reducer, Map());
